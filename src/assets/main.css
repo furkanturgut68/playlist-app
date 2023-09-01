@@ -19,6 +19,7 @@ body {
 
 a{
     text-decoration: none;
+   
 }
 
 button, .btn {
@@ -31,7 +32,7 @@ button, .btn {
 
 }
 
-button:hove, .btn:hover {
+button:hover, .btn:hover {
     background: var(--primary);
     color:white;
 }
@@ -43,7 +44,7 @@ button:disabled{
     cursor: not-allowed;
 }
 
-forms {
+form {
     max-width: 400px;
     margin:0 auto;
     padding: 30px;

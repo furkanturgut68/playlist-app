@@ -1,4 +1,4 @@
-import firebase from 'firebase/app'
+import {initializeApp}  from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 
@@ -11,9 +11,9 @@ const firebaseConfig = {
     appId: "1:512574930117:web:79ed49352b60b4eeefc4ac"
   };
 
-  firebase.initializeApp(firebaseConfig);
-  const projectFirestore = firebase.firestore();
-  const projectAuth = firebase.auth();
-  const timestamp = firebase.firestore.fieldValue.serverTimestamp;
+  const app = initializeApp(firebaseConfig);
+  // const projectFirestore = firebase.firestore();
+  // const projectAuth = firebase.auth();
+  // const timestamp = firebase.firestore.fieldValue.serverTimestamp;
 
-  export {projectFirestore,projectAuth,timestamp};
+  export {app};
