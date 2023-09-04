@@ -25,6 +25,7 @@
 
 <script>
 import { ref } from "vue";
+import {useRouter} from 'vue-router'
 import { getAuth, createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
 
 export default {
@@ -33,6 +34,7 @@ export default {
     const enteredMail = ref("");
     const enteredPass = ref("");
     const error = ref(null);
+    const router = useRouter();
     const isPending = ref(null);
 
     const handleLogin = () => {
@@ -52,12 +54,13 @@ export default {
 
           });
           
-          
         })
         .catch((err) => {
           error.value = err.message;
           isPending.value = false
         });
+
+        router.push({name:'HomeView'})
     };
 
     return {displayName,enteredMail,enteredPass,handleLogin,isPending,error};

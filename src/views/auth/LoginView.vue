@@ -15,6 +15,7 @@
 
 <script>
 import { ref } from "vue";
+import {useRouter} from 'vue-router'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
@@ -22,6 +23,7 @@ export default {
     const enteredMail = ref("");
     const enteredPass = ref("");
     const error = ref(null);
+    const router = useRouter();
     const isPending = ref(false);
 
     const handleSubmit = () => {
@@ -39,6 +41,8 @@ export default {
           enteredPass.value = '';
 
           // ...
+          router.push({name:'HomeView'});
+
         })
         .catch((err) => {
           error.value = err.message;

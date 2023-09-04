@@ -24,7 +24,7 @@
 <script>
 import { ref as vueRef } from "vue";
 import { getAuth } from "firebase/auth";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes  } from "firebase/storage";
 import { addDoc, collection, getFirestore,serverTimestamp } from "firebase/firestore";
 
 export default {
@@ -57,15 +57,21 @@ export default {
         console.log(currentUser.value);
         const storageRef = ref(
           storage,
-          `covers/${currentUser.value}/${file.value.name}`
+          `covers/${file.value.name}`
         );
+        const fileRef = file.value;
+       // const path = fileURL.filePath
+        const storageLocation = fileRef.fullPath;
+        console.log("Path:"+storageLocation)
+        
+
         await uploadBytes(storageRef, file.value);
         const db = getFirestore();
-        
+
         // Firestore save
         try {
           const docRef = await addDoc(collection(db, 'playLists'), {
-            coverUrl: "ftft",
+            coverUrl:  `covers/${currentUser.value}/${file.value.name}`,
             description: enteredDesc.value,
             title:enteredTitle.value,
             filePath: `covers/${currentUser.value}/${file.value.name}`,
@@ -74,6 +80,9 @@ export default {
             userName:displayName.value,
             createdAt:serverTimestamp(),
           });
+
+          enteredDesc.value = '';
+          enteredTitle.value = '';
 
           console.log("Document written with ID: ", docRef.id);
         } catch (e) {
